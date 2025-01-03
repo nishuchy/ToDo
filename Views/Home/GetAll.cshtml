@@ -1,0 +1,54 @@
+﻿@model List<ToDo.Models.Student>
+
+@{
+    ViewData["Title"] = "GetAll";
+}
+
+<h1>GetAll</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Roll</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+
+        {
+
+            foreach (var item in Model)
+
+            {
+                <tr>
+                    <td>@item.Sname</td>
+                    <td>@item.Roll</td>
+                    <td><a asp-action="Update" asp-route-sid="@item.SID">Update</a></td>
+                    <td>
+                        <form asp-action="Delete" method="post" asp-route-id="@item.SID" onsubmit="return confirmDelete()">
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        }
+
+        else
+
+        {
+            <tr>
+                <td colspan="2">No data available</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this item?");
+    }
+</script>

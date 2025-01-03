@@ -1,0 +1,104 @@
+﻿@model ToDo.Models.Student
+
+@{
+    ViewData["Title"] = "SavedStudent";
+}
+
+<h1>SavedStudent</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (ViewBag.Msg != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Msg
+            </div>
+        }
+        <form asp-action="SavedStudent">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Sname" class="control-label">Name</label>
+                <input asp-for="Sname" class="form-control" />
+                <span asp-validation-for="Sname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Roll" class="control-label"></label>
+                <input asp-for="Roll" class="form-control" />
+                <span asp-validation-for="Roll" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Address</label>
+
+                <select asp-for="Address" name="Address" class="form-control">
+                    @if (ViewBag.GetAddress != null)
+                    {
+                        <option value="">Select</option>
+                        foreach (var address in ViewBag.GetAddress)
+                        {
+                            <option value="@address">@address</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">No addresses available</option>
+                    }
+                </select>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.Student != null )
+
+                {
+
+                    foreach (var item in ViewBag.Student)
+
+                    {
+                        <tr>
+                            <td>@item.Sname</td>
+                            <td>@item.Roll</td>
+                        </tr>
+                    }
+
+                }
+
+                else
+
+                {
+                    <tr>
+                        <td colspan="2">No data available</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+      
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
